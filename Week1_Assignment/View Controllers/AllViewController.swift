@@ -35,7 +35,7 @@ class AllViewController: UITableViewController, ToDoCellDelegate, NewItemControl
 
         cell.setImage(image: item.image)
         cell.setTitle(title: item.name)
-        cell.setDescription(description: item.description)
+        cell.setDescription(description: item.desc)
         cell.setDueDate(dueDate: item.dueDate)
         cell.setDone(done: item.done)
         cell.delegate = self

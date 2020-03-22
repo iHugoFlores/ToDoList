@@ -40,7 +40,7 @@ class NewItemController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         
         if let toDoToEdit = item {
             titleField.text = toDoToEdit.name
-            descriptionField.text = toDoToEdit.description
+            descriptionField.text = toDoToEdit.desc
             dueDatePicker.date = toDoToEdit.dueDate
             imgPicker.selectRow(getRowbyImageName(toDoToEdit.image), inComponent: 0, animated: true)
         }
