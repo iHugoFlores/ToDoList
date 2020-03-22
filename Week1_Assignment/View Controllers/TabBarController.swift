@@ -26,4 +26,11 @@ class TabBarController: UITabBarController {
         taskItems.remove(at: indexPath.row)
     }
 
+    func addToDo(_ newItem: TaskItem) {
+        taskItems[0..<0] = [newItem]
+    }
+    
+    func updateToDo(_ newItem: TaskItem, _ indexPath: IndexPath) {
+        taskItems[indexPath.row] = newItem
+    }
 }
