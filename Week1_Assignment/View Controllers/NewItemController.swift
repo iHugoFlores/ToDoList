@@ -65,7 +65,7 @@ class NewItemController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     @IBAction func onDonePress(_ sender: Any) {
         let newTitle = titleField.text!
         let newDescription = descriptionField.text!
-        let newDueDate = dueDatePicker.date
+        let newDueDate = Calendar.current.startOfDay(for: dueDatePicker.date)
         let newImage = pickerData[imgPicker.selectedRow(inComponent: 0)]
         
         let newToDo = TaskItem(name: newTitle, description: newDescription, dueDate: newDueDate, image: newImage)
