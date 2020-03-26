@@ -14,13 +14,6 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(UIApplicationDelegate.applicationDidEnterBackground(_:)),
-            name: UIApplication.didEnterBackgroundNotification,
-            object: nil)
-        
         do {
             // Try to load from persistence
             self.taskItems = try [TaskItem].readFromPersistence()
@@ -40,7 +33,19 @@ class TabBarController: UITabBarController {
         }
     }
     
-    @objc public func applicationDidEnterBackground(_ notification: NSNotification) {
+    func setTaskToDone(id row: IndexPath) {
+        let item = taskItems[row.row]
+        item.setDone()
+        do {
+            print("Wiriting items to storage")
+            try taskItems.writeToPersistence()
+        } catch let error {
+            NSLog("Error writing to persistence: \(error)")
+        }
+    }
+    
+    func deleteToDo(at indexPath: IndexPath) {
+        taskItems.remove(at: indexPath.row)
         do {
             print("Wiriting items to storage")
             try taskItems.writeToPersistence()
@@ -49,21 +54,23 @@ class TabBarController: UITabBarController {
         }
     }
 
-    
-    func setTaskToDone(id row: IndexPath) {
-        let item = taskItems[row.row]
-        item.setDone()
-    }
-    
-    func deleteToDo(at indexPath: IndexPath) {
-        taskItems.remove(at: indexPath.row)
-    }
-
     func addToDo(_ newItem: TaskItem) {
         taskItems[0..<0] = [newItem]
+        do {
+            print("Wiriting items to storage")
+            try taskItems.writeToPersistence()
+        } catch let error {
+            NSLog("Error writing to persistence: \(error)")
+        }
     }
     
     func updateToDo(_ newItem: TaskItem, _ indexPath: IndexPath) {
         taskItems[indexPath.row] = newItem
+        do {
+            print("Wiriting items to storage")
+            try taskItems.writeToPersistence()
+        } catch let error {
+            NSLog("Error writing to persistence: \(error)")
+        }
     }
 }
