@@ -49,13 +49,14 @@ class ToDoCell: UITableViewCell {
         formatter.dateFormat = "yyyy-MM-dd"
         dueDateLabel.text = formatter.string(from: dueDate)
         if dueDate < Calendar.current.startOfDay(for: Date()) {
-            self.contentView.backgroundColor = UIColor(red: 1, green: 0.498, blue: 0.498, alpha: 1.0)
+            self.backgroundColor = UIColor(red: 1, green: 0.498, blue: 0.498, alpha: 1.0)
         }
     }
     
     func setDone(done: Bool) {
         setDoneButton.isHidden = done
         self.accessoryType = done ? .checkmark : .none
+        self.accessoryView?.backgroundColor = .red
     }
 
     @IBAction func onComplete(_ sender: Any) {
